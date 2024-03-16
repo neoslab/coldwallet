@@ -30,8 +30,6 @@ class EthWalletGen(QMainWindow):
         """ Class initialization """
         super().__init__()
         self.setWindowTitle("EthWalletGen")
-        self.setMinimumSize(800, 280)
-
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.layout = QVBoxLayout()
@@ -57,7 +55,9 @@ class EthWalletGen(QMainWindow):
         separator_line = QFrame()
         separator_line.setFrameShape(QFrame.Shape.HLine)
         separator_line.setFrameShadow(QFrame.Shadow.Sunken)
+        self.layout.addSpacing(5)
         self.layout.addWidget(separator_line)
+        self.layout.addSpacing(10)
 
         self.outfields = {}
         self.outlabels = [
@@ -69,17 +69,16 @@ class EthWalletGen(QMainWindow):
 
         label_width = 100
         for fieldlabel in self.outlabels:
-            field_layout = QHBoxLayout()
             label = QLabel(fieldlabel)
             label.setFixedWidth(label_width)
-            field_layout.addWidget(label)
+            self.layout.addWidget(label)
+            field_layout = QHBoxLayout()
             self.outfields[fieldlabel] = QLineEdit()
             self.outfields[fieldlabel].setReadOnly(True)
             field_layout.addWidget(self.outfields[fieldlabel])
             copybtn = QPushButton("Copy")
-
-            text2copy = self.outfields[fieldlabel].text()
-            copybtn.clicked.connect(lambda _, text=text2copy, field=fieldlabel: self.copy2clipboard(text, field))
+            copytxt = self.outfields[fieldlabel].text()
+            copybtn.clicked.connect(lambda _, text=copytxt, field=fieldlabel: self.copy2clipboard(text, field))
             field_layout.addWidget(copybtn)
             self.layout.addLayout(field_layout)
 
@@ -87,12 +86,13 @@ class EthWalletGen(QMainWindow):
         bottom_separator_line = QFrame()
         bottom_separator_line.setFrameShape(QFrame.Shape.HLine)
         bottom_separator_line.setFrameShadow(QFrame.Shadow.Sunken)
-        bottom_separator_line.setFixedHeight(2)
+        bottom_separator_line.setFixedHeight(10)
+        self.layout.addSpacing(5)
         self.layout.addWidget(bottom_separator_line)
 
         # Version
         version_layout = QHBoxLayout()
-        version_label = QLabel("v1.0.1")
+        version_label = QLabel("v1.0.2")
         version_label.setStyleSheet("font-size: 10px")
         version_label.setFixedHeight(10)
         version_layout.addStretch(1)
