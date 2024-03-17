@@ -1,4 +1,4 @@
-# CryptoSuite
+## CryptoSuite
 
 CryptoSuite is a comprehensive solution crafted in Python, comprising two powerful classes designed to empower users with the capability to generate offline Bitcoin (BTC) and Ethereum (ETH) wallets effortlessly. With CryptoSuite, users can securely create wallets, obtain mnemonic phrases, private keys, public keys, and more, ensuring the utmost privacy and security for their digital assets.
 
