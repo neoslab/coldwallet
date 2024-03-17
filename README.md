@@ -2,7 +2,9 @@
 
 CryptoSuite is a comprehensive solution crafted in Python, comprising two powerful classes designed to empower users with the capability to generate offline Bitcoin (BTC) and Ethereum (ETH) wallets effortlessly. With CryptoSuite, users can securely create wallets, obtain mnemonic phrases, private keys, public keys, and more, ensuring the utmost privacy and security for their digital assets.
 
-## Key Features
+* * *
+
+#### Key Features
 
 - Offline Generation: CryptoSuite operates entirely offline, minimizing the risk of exposure to online threats such as hacking and phishing attacks. This ensures that your wallet generation process remains secure and private.
 - Bitcoin (BTC) Wallet Generation: With CryptoSuite, users can generate Bitcoin wallets seamlessly. Whether you're a seasoned Bitcoin enthusiast or a newcomer to the cryptocurrency space, CryptoSuite simplifies the process of obtaining BTC addresses, private keys, and mnemonic phrases.
@@ -10,7 +12,7 @@ CryptoSuite is a comprehensive solution crafted in Python, comprising two powerf
 - Mnemonic Phrase Generation: Mnemonic phrases serve as a crucial backup mechanism for accessing your cryptocurrency funds. CryptoSuite facilitates the generation of mnemonic phrases, ensuring that you have a secure and convenient way to recover your wallet in case of emergencies.
 - Private Key and Public Key Extraction: CryptoSuite enables users to extract both private keys and public keys from their generated wallets. This functionality is essential for performing transactions and interacting with blockchain networks securely.
 
-## Why Choose CryptoSuite?
+#### Why Choose CryptoSuite?
 
 - Security: By operating offline, CryptoSuite prioritizes the security and privacy of your digital assets, mitigating the risks associated with online vulnerabilities.
 - User-Friendly Interface: CryptoSuite boasts an intuitive interface, making it accessible to both novice and experienced users in the cryptocurrency space.
@@ -21,7 +23,7 @@ Whether you're safeguarding your Bitcoin holdings or venturing into the world of
 
 * * *
 
-## Build the executable
+#### Build the executable
 
 ```shell
 git clone https://github.com/ghostreaver/cryptosuite
