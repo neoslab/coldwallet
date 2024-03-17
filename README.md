@@ -28,7 +28,7 @@ git clone https://github.com/ghostreaver/cryptosuite
 cd cryptosuite
 python3 -m pip install -r requirement.txt
 
-# To build the BTc Wallet Generator
+# To build the BTC Wallet Generator
 python3 builder.py -o "btcwalletgen" -c "btc"
 
 # To build the ETH Wallet Generator
