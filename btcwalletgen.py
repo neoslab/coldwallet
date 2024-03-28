@@ -5,6 +5,7 @@
 from bip32utils import BIP32Key
 from bitcoinlib.encoding import pubkeyhash_to_addr_bech32
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QFileDialog
 from PyQt6.QtWidgets import QFrame
 from PyQt6.QtWidgets import QHBoxLayout
 from PyQt6.QtWidgets import QLabel
@@ -19,6 +20,7 @@ import binascii
 import ecdsa
 import hashlib
 import mnemonic
+import os
 import pyperclip
 import sys
 
@@ -48,6 +50,10 @@ class BtcWalletGen(QMainWindow):
         self.generatebutton = QPushButton("Generate")
         self.generatebutton.clicked.connect(self.walletdisplay)
         self.titlelayout.addWidget(self.generatebutton)
+
+        self.exportbutton = QPushButton("Export Wallet")
+        self.exportbutton.clicked.connect(self.export_wallet)
+        self.titlelayout.addWidget(self.exportbutton)
 
         self.closebutton = QPushButton("Close")
         self.closebutton.clicked.connect(self.close)
@@ -105,6 +111,9 @@ class BtcWalletGen(QMainWindow):
         verslayout.addStretch(1)
         verslayout.addWidget(verslabel)
         self.layout.addLayout(verslayout)
+
+        # Set minimum window width
+        self.setMinimumWidth(350)
 
         # Layout
         self.centralwidget.setLayout(self.layout)
@@ -269,6 +278,21 @@ class BtcWalletGen(QMainWindow):
         """ Copy selected text to clipboard """
         pyperclip.copy(text)
         QMessageBox.information(self, "Copied", f"Content of {label} has been copied to clipboard.")
+
+    # @name: export_wallet()
+    # @description: Export wallet data to text file
+    # @return: void
+    def export_wallet(self):
+        """ Export wallet data to text file """
+        folder_path = QFileDialog.getExistingDirectory(self, "Select Folder")
+        if folder_path:
+            wallet_output = self.walletgen()
+            priv_key = wallet_output["Private Hex"]
+            file_name = os.path.join(folder_path, f"{priv_key}.txt")
+            with open(file_name, "w") as file:
+                for fieldlabel, value in wallet_output.items():
+                    file.write(f"{fieldlabel}: {value}\n")
+            QMessageBox.information(self, "Exported", "Wallet data exported successfully.")
 
 
 # Main function
