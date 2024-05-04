@@ -26,7 +26,7 @@ Whether you're safeguarding your Bitcoin holdings or venturing into the world of
 #### Build the executable
 
 ```shell
-git clone https://github.com/ghostreaver/cryptosuite
+git clone https://github.com/neoslab/cryptosuite
 cd cryptosuite
 python3 -m pip install -r requirement.txt
 
