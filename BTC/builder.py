@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-# coding: utf-8
+""" coding: utf-8 """
 
 # Import libraries
 import os
+import platform
 import shutil
 import tempfile
 from argparse import ArgumentParser
@@ -13,15 +13,15 @@ class Builder(object):
 
     # @name: __init__()
     # @description: Class initialization
+    # @param: `outputexe` the executable output name
     # @return: self values
-    def __init__(self, outputexe, cryptoname):
+    def __init__(self, outputexe):
         """ Class initialization """
         self.execfile = False
         self.execname = outputexe
         self.execname = os.path.basename(self.execname)
-        self.worktemp = os.path.join(tempfile.gettempdir(), 'WalletGen')
+        self.worktemp = os.path.join(tempfile.gettempdir(), 'BTCColdWallet')
         self.builddir = os.path.dirname(__file__)
-        self.currency = cryptoname
 
     # @name: buildexec()
     # @description: Build the wallet generator
@@ -36,13 +36,7 @@ class Builder(object):
             os.remove(buildfile)
 
         # Create a copy of the agent
-        if self.currency == 'btc':
-            shutil.copy('btcwalletgen.py', buildfile)
-        elif self.currency == 'eth':
-            shutil.copy('ethwalletgen.py', buildfile)
-        else:
-            print('This cryptocurrency is not defined')
-            exit(0)
+        shutil.copy('coldwallet.py', buildfile)
 
         # Check if temporary path exists
         if os.path.exists(self.worktemp):
@@ -61,14 +55,29 @@ class Builder(object):
         shutil.move(buildfile, self.execname + '.py')
 
         # Create the executable using PyInstaller
-        if self.currency == 'btc':
-            os.system('pyinstaller --collect-data=bitcoinlib --noconsole --onefile ' + self.execname + '.py')
-        elif self.currency == 'eth':
-            os.system('pyinstaller --noconsole --onefile ' + self.execname + '.py')
-        else:
-            print('This cryptocurrency is not defined')
-            exit(0)
+        exedata = 'bitcoinlib'
+        exefile = self.execname + '.py'
+        upxpath = '/usr/bin/upx'
 
+        if platform.system() == 'Linux':
+            os.system('pyinstaller '
+                      '--collect-data={} '
+                      '--noconsole '
+                      '--onefile '
+                      '--add-data resources/assets/icon/icon.png:resources/assets/icon '
+                      '--add-data resources/assets/logo/logo.png:resources/assets/logo '
+                      '--upx-dir={} {}'
+                      .format(exedata, upxpath, exefile))
+        elif platform.system() == 'Windows':
+            appicon = "resources\\assets\\icon\\icon.ico"
+            os.system('pyinstaller '
+                      '--collect-data={} '
+                      '--noconsole '
+                      '--onefile '
+                      '--add-data resources/assets/icon/icon.png:resources/assets/icon '
+                      '--add-data resources/assets/logo/logo.png:resources/assets/logo '
+                      '--upx-dir={} {}'
+                      .format(exedata, appicon, upxpath, exefile))
         self.execfile = os.path.join(self.worktemp, 'dist', self.execname)
 
         # Return to main directory
@@ -84,16 +93,15 @@ class Builder(object):
         os.remove(buildfile)
 
         # Terminate
-        print('WalletGen built successfully: %s' % self.execname)
+        print('BTCColdWallet built successfully: %s' % self.execname)
 
 
 # Main function
 def main():
-    parser = ArgumentParser(description='Build a StopWatch executable')
+    parser = ArgumentParser(description='Build BTCColdWallet executable')
     parser.add_argument('-o', '--output', required=True, help='executable name')
-    parser.add_argument('-c', '--crypto', required=True, help='crypto (eth or btc)')
     args = parser.parse_args()
-    walletgen = Builder(outputexe=args.output, cryptoname=args.crypto)
+    walletgen = Builder(outputexe=args.output)
     walletgen.buildexec()
 
 

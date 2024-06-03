@@ -1,0 +1,7 @@
+base58
+bip32utils
+bitcoinlib
+ecdsa
+mnemonic
+pyinstaller
+pyqt6

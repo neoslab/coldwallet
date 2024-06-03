@@ -1,10 +1,7 @@
 base58
-bip32utils
-bitcoinlib
 ecdsa
 eth-account
 eth-keys
 mnemonic
 pyinstaller
-pyperclip
 pyqt6
