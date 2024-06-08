@@ -52,8 +52,9 @@ class BTCColdWallet(QMainWindow):
         # Define app build date
         self.appbuild = "June 03, 2024"
 
-        # Define windows title
+        # Define windows value
         self.setWindowTitle("BTCColdWallet")
+        self.setStyleSheet("background-color:#2a2e32;")
 
         # Create the menu bar
         menu_bar = self.menuBar()
@@ -111,13 +112,33 @@ class BTCColdWallet(QMainWindow):
         # Buttons
         self.btn_generate = QPushButton("Generate")
         self.btn_generate.setFixedSize(100, 35)
-        self.btn_generate.setStyleSheet("font-size:13px;border:1px solid #787878;")
+        self.btn_generate.setStyleSheet("""
+            QPushButton {
+                font-size:13px;
+                color:#ffffff;
+                background-color:#23262a;
+                border:1px solid #787878;
+            }
+            QPushButton:hover {
+                background-color:#3a3f45;
+            }
+        """)
         self.btn_generate.clicked.connect(self.wallet_generator)
         self.header_layout.addWidget(self.btn_generate)
 
         self.btn_export = QPushButton("Export")
         self.btn_export.setFixedSize(100, 35)
-        self.btn_export.setStyleSheet("font-size:13px;border:1px solid #787878;")
+        self.btn_export.setStyleSheet("""
+            QPushButton {
+                font-size:13px;
+                color:#ffffff;
+                background-color:#23262a;
+                border:1px solid #787878;
+            }
+            QPushButton:hover {
+                background-color:#3a3f45;
+            }
+        """)
         self.btn_export.clicked.connect(self.wallet_export)
         self.header_layout.addWidget(self.btn_export)
 
@@ -158,7 +179,10 @@ class BTCColdWallet(QMainWindow):
             self.outfields[fieldlabel] = QLineEdit()
             self.outfields[fieldlabel].setReadOnly(True)
             self.outfields[fieldlabel].setFixedSize(460, 35)
-            self.outfields[fieldlabel].setStyleSheet("font-size:14px;margin:0px;border:1px solid #787878;")
+            self.outfields[fieldlabel].setStyleSheet("font-size:14px;"
+                                                     "margin:0px;"
+                                                     "background-color:#23262a;"
+                                                     "border:1px solid #787878;")
             fieldlayout.addWidget(self.outfields[fieldlabel])
             self.vlayout.addLayout(fieldlayout)
 
@@ -182,13 +206,13 @@ class BTCColdWallet(QMainWindow):
     # @return: array
     def wallet_creator(self):
         """ Generate wallet details """
-        mnemon = self.wallet_mnemonic()
-        privkey = self.privatekey_hex(mnemon)
+        mnemonics = self.wallet_mnemonic()
+        privkey = self.privatekey_hex(mnemonics)
         pubkey = self.wallet_pubkey(privkey)
         wifu = self.privatekey_wifu(privkey)
         wifc = self.privatekey_wifc(privkey)
         wallet = {
-            "Mnemonic": mnemon,
+            "Mnemonic": mnemonics,
             "Public Key": pubkey,
             "Private Hex": privkey,
             "Private WIFu": wifu,
@@ -340,6 +364,7 @@ class BTCColdWallet(QMainWindow):
     # @description: Return the 'about' dialog content
     # @return: void
     def showabout(self):
+        """ Return the 'about' dialog content """
         # Create a custom About dialog
         aboutdialg = QDialog(self)
         aboutdialg.setWindowTitle("About BTCColdWallet")
@@ -379,13 +404,14 @@ class BTCColdWallet(QMainWindow):
             print("Icon file not found:", iconpath)
 
         # Add homepage information
-        homepage = QLabel("Copyright © 2002-2024 - NeosLab")
+        layout.addSpacing(10)
+        homepage = QLabel("Copyright © 2002-2024")
         homepage.setAlignment(Qt.AlignmentFlag.AlignCenter)
         homepage.setStyleSheet("font-size:14px;")
         layout.addWidget(homepage)
 
         # Add homepage link
-        author = QLabel('<a href="https://neoslab.com">NeosLab</a>')
+        author = QLabel('<a href="https://neoslab.com">www.neoslab.com</a>')
         author.setOpenExternalLinks(True)
         author.setAlignment(Qt.AlignmentFlag.AlignCenter)
         author.setStyleSheet("font-size:14px;")

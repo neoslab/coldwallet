@@ -101,8 +101,8 @@ def main():
     parser = ArgumentParser(description='Build ETHColdWallet executable')
     parser.add_argument('-o', '--output', required=True, help='executable name')
     args = parser.parse_args()
-    walletgen = Builder(outputexe=args.output)
-    walletgen.buildexec()
+    execgen = Builder(outputexe=args.output)
+    execgen.buildexec()
 
 
 # Callback
