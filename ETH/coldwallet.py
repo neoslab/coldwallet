@@ -42,15 +42,10 @@ class ETHColdWallet(QMainWindow):
 
         # Define app version
         self.appversion = "1.0.3"
-
-        # Define app compiled date
         self.appcompiled = "June 03, 2024"
-
-        # Define app build date
         self.appbuild = "June 03, 2024"
-
-        # Define windows title
-        self.setWindowTitle("BTCColdWallet")
+        self.setWindowTitle("ETHColdWallet")
+        self.setStyleSheet("background-color:#2a2e32;")
 
         # Create the menu bar
         menu_bar = self.menuBar()

@@ -43,16 +43,10 @@ class BTCColdWallet(QMainWindow):
         """ Class initialization """
         super().__init__()
 
-        # Define app version
+        # Define app variables
         self.appversion = "1.0.3"
-
-        # Define app compiled date
         self.appcompiled = "June 03, 2024"
-
-        # Define app build date
         self.appbuild = "June 03, 2024"
-
-        # Define windows value
         self.setWindowTitle("BTCColdWallet")
         self.setStyleSheet("background-color:#2a2e32;")
 
